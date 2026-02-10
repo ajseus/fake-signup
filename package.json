@@ -1,0 +1,17 @@
+{
+  "name": "fake-signup-cypress",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "npx http-server ./app -p 8080 -c-1",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test serve http://127.0.0.1:8080 cy:run"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.0",
+    "cypress": "^13.0.0",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^2.0.6"
+  }
+}
