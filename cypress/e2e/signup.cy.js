@@ -1,7 +1,7 @@
 describe("Fake Signup - E2E", () => {
   it("cadastra com dados novos a cada execução e valida sucesso", () => {
     cy.generateSignupData().then((u) => {
-      cy.visit("/index.html");
+      cy.visit("/");
 
       cy.get('[data-cy="firstName"]').type(u.firstName);
       cy.get('[data-cy="lastName"]').type(u.lastName);
@@ -36,7 +36,7 @@ describe("Fake Signup - E2E", () => {
   });
 
   it("mostra erro quando email é inválido (teste negativo)", () => {
-    cy.visit("/index.html");
+    cy.visit("/");
 
     cy.get('[data-cy="firstName"]').type("Teste");
     cy.get('[data-cy="lastName"]').type("Usuario");
