@@ -82,6 +82,7 @@ fake-signup/
 ├── cypress.config.js
 ├── package.json
 └── README.md
+
 🔄 Geração de Dados Dinâmicos
 A cada execução:
 
@@ -106,6 +107,7 @@ Zero conflito de dados
 Execuções repetíveis
 
 ▶️ Como executar o projeto
+
 1️⃣ Instalar dependências
 bash
 Copiar código
@@ -127,6 +129,7 @@ Tudo automático (server + testes)
 bash
 Copiar código
 npm run test:e2e
+
 ✅ Boas práticas aplicadas
 Uso de data-cy para seletores
 
