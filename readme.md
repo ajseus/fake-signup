@@ -82,3 +82,78 @@ fake-signup/
 ├── cypress.config.js
 ├── package.json
 └── README.md
+🔄 Geração de Dados Dinâmicos
+A cada execução:
+
+Nome
+
+Sobrenome
+
+E-mail único
+
+Senha segura
+
+Data de nascimento
+
+Telefone
+
+Tudo é gerado automaticamente usando faker, garantindo:
+
+Testes independentes
+
+Zero conflito de dados
+
+Execuções repetíveis
+
+▶️ Como executar o projeto
+1️⃣ Instalar dependências
+bash
+Copiar código
+npm install
+2️⃣ Subir a aplicação fake
+bash
+Copiar código
+npm run serve
+3️⃣ Executar os testes
+Headless
+bash
+Copiar código
+npm run cy:run
+Interface gráfica
+bash
+Copiar código
+npm run cy:open
+Tudo automático (server + testes)
+bash
+Copiar código
+npm run test:e2e
+✅ Boas práticas aplicadas
+Uso de data-cy para seletores
+
+Separação de responsabilidades
+
+Custom Commands
+
+Factory de dados
+
+Testes positivos e negativos
+
+Código legível e organizado
+
+📌 Próximos passos (evoluções possíveis)
+Mock de API com cy.intercept()
+
+Page Objects
+
+Relatórios com Mochawesome
+
+Pipeline CI (GitHub Actions)
+
+Testes de acessibilidade
+
+👩‍💻 Sobre
+Projeto desenvolvido para fins de portfólio em Qualidade de Software e Automação de Testes.
+
+💡 Foco em qualidade como processo, não apenas execução de testes.
+
+⭐ Se esse projeto te ajudou ou chamou atenção, fique à vontade para deixar uma estrela!
