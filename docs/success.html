@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pedido Confirmado</title>
+  <style>
+    body{font-family:system-ui;background:#0b1220;color:#e8eefc;margin:0;padding:24px}
+    .wrap{max-width:620px;margin:0 auto}
+    .card{background:rgba(0,255,120,.08);border:1px solid rgba(120,255,170,.35);border-radius:16px;padding:14px}
+    a{display:inline-block;margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(130,170,255,.18);color:#e8eefc;text-decoration:none}
+    a:hover{background:rgba(130,170,255,.24)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="margin:0 0 10px">✅ Pedido confirmado</h1>
+    <div class="card">
+      <div data-cy="orderMessage"></div>
+      <div style="margin-top:10px" data-cy="orderId"></div>
+    </div>
+    <a href="./shop.html" data-cy="backToShopFromSuccess">Voltar para loja</a>
+  </div>
+
+  <script>
+    const raw = localStorage.getItem("fake_last_order");
+    const order = raw ? JSON.parse(raw) : null;
+
+    const msg = document.querySelector('[data-cy="orderMessage"]');
+    const id = document.querySelector('[data-cy="orderId"]');
+
+    if(!order){
+      msg.textContent = "Nenhum pedido encontrado.";
+    } else {
+      msg.textContent = `Obrigado, ${order.name}! Seu pedido foi registrado.`;
+      id.textContent = `Pedido: ${order.orderId}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout</title>
+  <style>
+    body{font-family:system-ui;background:#0b1220;color:#e8eefc;margin:0;padding:24px}
+    .wrap{max-width:620px;margin:0 auto}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px}
+    .field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+    input,button{padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.22);color:#e8eefc}
+    button{cursor:pointer;background:rgba(130,170,255,.18)}
+    button:hover{background:rgba(130,170,255,.24)}
+    .error{display:none;margin-top:10px;padding:10px;border-radius:12px;border:1px solid rgba(255,120,120,.35);background:rgba(255,0,0,.10)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="margin:0 0 10px">Checkout</h1>
+    <div class="card">
+      <form id="checkoutForm" novalidate>
+        <div class="field">
+          <label>Nome</label>
+          <input data-cy="customerName" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input data-cy="customerEmail" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>Endereço</label>
+          <input data-cy="customerAddress" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>Cartão (fake)</label>
+          <input data-cy="cardNumber" placeholder="4111 1111 1111 1111" autocomplete="off" />
+        </div>
+
+        <button type="submit" data-cy="placeOrder">Confirmar pedido</button>
+        <div class="error" data-cy="checkoutError"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function getCart(){ return JSON.parse(localStorage.getItem("fake_cart") || "[]"); }
+    function setCart(cart){ localStorage.setItem("fake_cart", JSON.stringify(cart)); }
+    function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+    const form = document.getElementById("checkoutForm");
+    const errorBox = document.querySelector('[data-cy="checkoutError"]');
+
+    function showError(msg){
+      errorBox.textContent = msg;
+      errorBox.style.display = "block";
+    }
+    function hideError(){
+      errorBox.textContent = "";
+      errorBox.style.display = "none";
+    }
+
+    form.addEventListener("submit",(e)=>{
+      e.preventDefault();
+      hideError();
+
+      const cart = getCart();
+      if(cart.length === 0) return showError("Carrinho vazio.");
+
+      const name = document.querySelector('[data-cy="customerName"]').value.trim();
+      const email = document.querySelector('[data-cy="customerEmail"]').value.trim();
+      const address = document.querySelector('[data-cy="customerAddress"]').value.trim();
+      const card = document.querySelector('[data-cy="cardNumber"]').value.replace(/\s/g,"");
+
+      if(!name) return showError("Informe o nome.");
+      if(!isValidEmail(email)) return showError("E-mail inválido.");
+      if(!address) return showError("Informe o endereço.");
+      if(card.length < 12) return showError("Cartão inválido.");
+
+      const orderId = "ORD-" + Date.now();
+      localStorage.setItem("fake_last_order", JSON.stringify({ orderId, name, email, items: cart }));
+
+      setCart([]); // limpa carrinho
+      window.location.href = "./success.html";
+    });
+  </script>
+</body>
+</html>
